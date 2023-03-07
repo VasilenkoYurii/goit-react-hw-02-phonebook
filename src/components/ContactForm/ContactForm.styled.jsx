@@ -19,3 +19,9 @@ export const Input = styled(Field)`
   margin-left: 40px;
   font-size: 14px;
 `;
+
+export const Button = styled.button`
+  &:hover {
+    background-color: teal;
+  }
+`;

@@ -2,10 +2,10 @@ import PropTypes from 'prop-types';
 import { Ol } from './ContactsList.styled';
 import ContactItem from 'components/ContactItem/ContactItem';
 
-const ContactsList = ({ contacts }) => {
+const ContactsList = ({ contacts, onDeleteContact }) => {
   return (
-    <Ol type="1">
-      <ContactItem contacts={contacts} />
+    <Ol>
+      <ContactItem contacts={contacts} onDeleteContact={onDeleteContact} />
     </Ol>
   );
 };

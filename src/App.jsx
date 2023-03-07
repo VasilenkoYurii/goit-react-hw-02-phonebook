@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { nanoid } from 'nanoid';
+import Notiflix from 'notiflix';
 import Section from 'components/Section/Section';
 import ContactsList from 'components/ContactsList/ContactsList';
 import Filter from 'components/Filter/Filter';
@@ -19,9 +20,29 @@ export class App extends Component {
   };
 
   addContact = values => {
+    for (const contact of this.state.contacts) {
+      if (values.name.toLowerCase() === contact.name.toLowerCase()) {
+        return Notiflix.Notify.failure(`${values.name} is already in contact`);
+      } else if (values.number.toLowerCase() === contact.number.toLowerCase()) {
+        return Notiflix.Notify.failure(
+          `${values.number} is already in contact`
+        );
+      }
+    }
+
     this.setState(prevState => ({
       contacts: [...prevState.contacts, { ...values, id: nanoid() }],
     }));
+    Notiflix.Notify.success(
+      'Super, the contact has been added to the contact list'
+    );
+  };
+
+  deleteContact = (contactId, contactName) => {
+    this.setState(prevState => ({
+      contacts: prevState.contacts.filter(contact => contact.id !== contactId),
+    }));
+    Notiflix.Notify.success(`Contact ${contactName} deleted successfully`);
   };
 
   onChangeFind = e => {
@@ -49,7 +70,10 @@ export class App extends Component {
 
         <Section title="Contacts">
           <Filter onChangeFind={this.onChangeFind} value={filter} />
-          <ContactsList contacts={visibleContacts} />
+          <ContactsList
+            contacts={visibleContacts}
+            onDeleteContact={this.deleteContact}
+          />
         </Section>
       </>
     );

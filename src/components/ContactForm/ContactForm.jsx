@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { Formik } from 'formik';
-import { MainForm, Label, Input } from './ContactForm.styled';
+import { MainForm, Label, Input, Button } from './ContactForm.styled';
 
 class ContactForm extends Component {
   state = {
@@ -49,7 +49,7 @@ class ContactForm extends Component {
             />
           </Label>
 
-          <button type="submit">Add contact</button>
+          <Button type="submit">Add contact</Button>
         </MainForm>
       </Formik>
     );
