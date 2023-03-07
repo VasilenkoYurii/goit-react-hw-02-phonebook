@@ -1,16 +1,11 @@
 import PropTypes from 'prop-types';
 import { Ol } from './ContactsList.styled';
+import ContactItem from 'components/ContactItem/ContactItem';
 
 const ContactsList = ({ contacts }) => {
   return (
     <Ol type="1">
-      {contacts.map(({ id, name, number }) => {
-        return (
-          <li key={id}>
-            {name}: {number}
-          </li>
-        );
-      })}
+      <ContactItem contacts={contacts} />
     </Ol>
   );
 };

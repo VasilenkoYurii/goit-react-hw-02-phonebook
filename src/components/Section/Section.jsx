@@ -1,9 +1,13 @@
 import PropTypes from 'prop-types';
-import { SectionDiv, SectionTitle } from './Section.styled';
+import { SectionDiv, SectionTitle, SectionMainTitle } from './Section.styled';
 
 const Section = ({ title, children }) => (
   <SectionDiv>
-    {title && <SectionTitle>{title}</SectionTitle>}
+    {title && title === 'Phonebook' ? (
+      <SectionMainTitle>{title}</SectionMainTitle>
+    ) : (
+      <SectionTitle>{title}</SectionTitle>
+    )}
     {children}
   </SectionDiv>
 );
