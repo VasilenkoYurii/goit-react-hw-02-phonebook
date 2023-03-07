@@ -1,9 +1,8 @@
 import { Component } from 'react';
-import { Formik, Form, Field } from 'formik';
 import { nanoid } from 'nanoid';
 import Section from 'Section/Section';
 import ContactsList from 'ContactsList/ContactsList';
-import FindContact from 'FindContact/FindContact';
+import Filter from 'Filter/Filter';
 import PhoneForm from 'PhoneForm/PhoneForm';
 
 export class App extends Component {
@@ -35,11 +34,20 @@ export class App extends Component {
 
   onChangeFind = e => {
     this.setState({ filter: e.target.value });
-    console.log(e.target.value);
+  };
+
+  getVisibleContacts = () => {
+    const { filter, contacts } = this.state;
+    const normalizedFilter = filter.toLowerCase();
+
+    return contacts.filter(contact =>
+      contact.name.toLowerCase().includes(normalizedFilter)
+    );
   };
 
   render() {
-    const { contacts, filter } = this.state;
+    const { filter } = this.state;
+    const visibleContacts = this.getVisibleContacts();
 
     return (
       <>
@@ -51,8 +59,8 @@ export class App extends Component {
         </Section>
 
         <Section title="Contacts">
-          <FindContact onChangeFind={this.onChangeFind} value={filter} />
-          <ContactsList contacts={contacts} />
+          <Filter onChangeFind={this.onChangeFind} value={filter} />
+          <ContactsList contacts={visibleContacts} />
         </Section>
       </>
     );

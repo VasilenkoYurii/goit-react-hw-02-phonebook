@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import { Ol } from './ContactsList.styled';
 
 const ContactsList = ({ contacts }) => {
   return (
-    <ul>
+    <Ol type="1">
       {contacts.map(({ id, name, number }) => {
         return (
           <li key={id}>
@@ -10,7 +11,7 @@ const ContactsList = ({ contacts }) => {
           </li>
         );
       })}
-    </ul>
+    </Ol>
   );
 };
 
