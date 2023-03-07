@@ -1,6 +1,4 @@
 import { Component } from 'react';
-import { nanoid } from 'nanoid';
-import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import { MainForm, Label, Input } from './ContactForm.styled';
 
