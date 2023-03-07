@@ -3,7 +3,7 @@ import { nanoid } from 'nanoid';
 import Section from 'Section/Section';
 import ContactsList from 'ContactsList/ContactsList';
 import Filter from 'Filter/Filter';
-import PhoneForm from 'PhoneForm/PhoneForm';
+import ContactForm from 'ContactForm/ContactForm';
 
 export class App extends Component {
   state = {
@@ -16,17 +16,9 @@ export class App extends Component {
       { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
     ],
     filter: '',
-    name: '',
-    number: '',
   };
 
-  initialValues = {
-    name: this.state.name,
-    number: this.state.number,
-  };
-
-  handleSubmit = (values, { resetForm }) => {
-    resetForm();
+  addContact = values => {
     this.setState(prevState => ({
       contacts: [...prevState.contacts, { ...values, id: nanoid() }],
     }));
@@ -52,10 +44,7 @@ export class App extends Component {
     return (
       <>
         <Section title="Phonebook">
-          <PhoneForm
-            initialValues={this.initialValues}
-            onSubmit={this.handleSubmit}
-          />
+          <ContactForm onSubmit={this.addContact} />
         </Section>
 
         <Section title="Contacts">
